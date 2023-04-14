@@ -4,25 +4,25 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.weather.R
-import com.example.weather.WeatherApplication
 import com.example.weather.databinding.ActivityMainBinding
 import com.example.weather.presentation.dialogs.CitySelectionDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavigation: BottomNavigationView
-    lateinit var viewModel: ViewModelMainActivity
+    internal val viewModel: ViewModelMainActivity by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModel = ViewModelMainActivity(application as WeatherApplication)
 
         setSupportActionBar(binding.toolbar)
 

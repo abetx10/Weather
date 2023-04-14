@@ -1,17 +1,17 @@
 package com.example.weather.repository
 
 import android.util.Log
-import com.example.weather.data.model.CurrentWeatherMinimalApiResponse
 import com.example.weather.data.OpenWeatherMapApi
 import com.example.weather.data.model.CityData
+import com.example.weather.data.model.CurrentWeatherMinimalApiResponse
 import com.example.weather.data.model.FiveDayWeatherApiResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-
-class CityRepository {
+class CityRepository @Inject constructor() {
     private val api: OpenWeatherMapApi
 
     init {

@@ -7,8 +7,9 @@ import com.example.weather.data.model.CityFiveDayWeatherData
 import com.example.weather.repository.CityRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class WeatherDataManager(private val cityRepository: CityRepository) {
+class WeatherDataManager @Inject constructor(private val cityRepository: CityRepository) {
 
     suspend fun loadCitiesData(cities: Array<String>, apiKey: String): List<CityData> {
         val cityDataList = mutableListOf<CityData>()

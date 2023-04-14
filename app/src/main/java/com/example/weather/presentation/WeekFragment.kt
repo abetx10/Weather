@@ -6,27 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.weather.R
+import com.example.weather.databinding.FragmentWeekBinding
 import com.example.weather.presentation.adapters.WeekAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class WeekFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewModel: ViewModelMainActivity
+    private lateinit var binding: FragmentWeekBinding
+    lateinit var viewModel: ViewModelMainActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_week, container, false)
-        recyclerView = view.findViewById(R.id.week_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
+        binding = FragmentWeekBinding.inflate(inflater, container, false)
         viewModel = (activity as MainActivity).viewModel
-
-        return view
+        binding.weekRecyclerView.layoutManager = LinearLayoutManager(context)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,9 +32,9 @@ class WeekFragment : Fragment() {
         viewModel.selectedCity.observe(viewLifecycleOwner) { city ->
             viewModel.cityFiveDayWeatherDataMap.observe(viewLifecycleOwner) { cityWeatherDataMap ->
                 cityWeatherDataMap[city.name]?.let { weatherDataList ->
-                    recyclerView.adapter = WeekAdapter(weatherDataList)
+                    binding.weekRecyclerView.adapter = WeekAdapter(weatherDataList)
                 } ?: run {
-                    recyclerView.adapter = WeekAdapter(emptyList())
+                    binding.weekRecyclerView.adapter = WeekAdapter(emptyList())
                 }
             }
         }

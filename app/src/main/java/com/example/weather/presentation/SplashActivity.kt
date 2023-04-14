@@ -20,7 +20,6 @@ class SplashActivity : AppCompatActivity() {
         val animation: Animation = AnimationUtils.loadAnimation(this, R.anim.scale_and_fade_in)
         logoImageView.startAnimation(animation)
 
-
         val SPLASH_DISPLAY_LENGTH = 3000L
 
         Handler(Looper.getMainLooper()).postDelayed({

@@ -4,22 +4,21 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.weather.R
-import com.example.weather.WeatherApplication
 import com.example.weather.data.WeatherDataManager
 import com.example.weather.data.model.CityCurrentWeatherData
 import com.example.weather.data.model.CityData
 import com.example.weather.data.model.CityFiveDayWeatherData
 import com.example.weather.data.processWeatherData
-import com.example.weather.repository.CityRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlin.math.min
-import kotlin.math.max
+import javax.inject.Inject
 
-
-class ViewModelMainActivity(private val application: WeatherApplication) : ViewModel() {
-    private val cityRepository = CityRepository()
-    private val weatherDataManager = WeatherDataManager(cityRepository)
+@HiltViewModel
+class ViewModelMainActivity @Inject constructor(
+    private val weatherDataManager: WeatherDataManager,
+    private val apiKey: String,
+    private val cities: Array<String>
+) : ViewModel() {
     private val viewModelJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
@@ -27,13 +26,16 @@ class ViewModelMainActivity(private val application: WeatherApplication) : ViewM
     val cityDataList: LiveData<List<CityData>> = _cityDataList
 
     private val _cityCurrentWeatherDataList = MutableLiveData<List<CityCurrentWeatherData>>()
-    val cityCurrentWeatherDataList: LiveData<List<CityCurrentWeatherData>> = _cityCurrentWeatherDataList
+    val cityCurrentWeatherDataList: LiveData<List<CityCurrentWeatherData>> =
+        _cityCurrentWeatherDataList
 
     private val _selectedCity = MutableLiveData<CityCurrentWeatherData>()
     val selectedCity: LiveData<CityCurrentWeatherData> = _selectedCity
 
-    private val _cityFiveDayWeatherDataMap = MutableLiveData<Map<String, List<CityFiveDayWeatherData>>>()
-    val cityFiveDayWeatherDataMap: LiveData<Map<String, List<CityFiveDayWeatherData>>> = _cityFiveDayWeatherDataMap
+    private val _cityFiveDayWeatherDataMap =
+        MutableLiveData<Map<String, List<CityFiveDayWeatherData>>>()
+    val cityFiveDayWeatherDataMap: LiveData<Map<String, List<CityFiveDayWeatherData>>> =
+        _cityFiveDayWeatherDataMap
 
     init {
         loadData()
@@ -48,42 +50,42 @@ class ViewModelMainActivity(private val application: WeatherApplication) : ViewM
     }
 
     private suspend fun loadCitiesData(): List<CityData> {
-        val cities = application.resources.getStringArray(R.array.cities)
-        val apiKey = application.openWeatherMapApiKey
-
         val cityDataList = withContext(Dispatchers.IO) {
             weatherDataManager.loadCitiesData(cities, apiKey)
         }
         _cityDataList.value = cityDataList
 
         cityDataList.forEach { cityData ->
-            Log.d("MainActivityViewModel", "City: ${cityData.name}, Latitude: ${cityData.lat}, Longitude: ${cityData.lon}")
+            Log.d(
+                "MainActivityViewModel",
+                "City: ${cityData.name}, Latitude: ${cityData.lat}, Longitude: ${cityData.lon}"
+            )
         }
 
         return cityDataList
     }
 
     private suspend fun loadCityCurrentWeatherData(cityDataList: List<CityData>) {
-        val apiKey = application.openWeatherMapApiKey
-
         val cityCurrentWeatherDataList = withContext(Dispatchers.IO) {
             weatherDataManager.loadCityCurrentWeatherData(cityDataList, apiKey)
         }
         _cityCurrentWeatherDataList.value = cityCurrentWeatherDataList
 
         cityCurrentWeatherDataList.forEach { cityCurrentWeatherData ->
-            Log.d("MainActivityViewModel", "City: ${cityCurrentWeatherData.name}, Latitude: ${cityCurrentWeatherData.lat}, Longitude: ${cityCurrentWeatherData.lon}, Temperature: ${cityCurrentWeatherData.temp}, Pressure: ${cityCurrentWeatherData.pressure}, Wind speed: ${cityCurrentWeatherData.wind_speed}")
+            Log.d(
+                "MainActivityViewModel",
+                "City: ${cityCurrentWeatherData.name}, Latitude: ${cityCurrentWeatherData.lat}, Longitude: ${cityCurrentWeatherData.lon}, Temperature: ${cityCurrentWeatherData.temp}, Pressure: ${cityCurrentWeatherData.pressure}, Wind speed: ${cityCurrentWeatherData.wind_speed}"
+            )
         }
     }
 
     private fun loadCityFiveDayWeatherData(cityDataList: List<CityData>) {
-        val apiKey = application.openWeatherMapApiKey
-
         coroutineScope.launch {
             Log.d("MainActivityViewModel", "Loading five-day weather data for cities")
             val cityFiveDayWeatherDataMap = mutableMapOf<String, List<CityFiveDayWeatherData>>()
             for (cityData in cityDataList) {
-                val cityFiveDayWeatherDataList = weatherDataManager.loadCityFiveDayWeatherData(cityData, apiKey)
+                val cityFiveDayWeatherDataList =
+                    weatherDataManager.loadCityFiveDayWeatherData(cityData, apiKey)
                 val processedCityWeatherDataList = cityFiveDayWeatherDataList.processWeatherData()
                 cityFiveDayWeatherDataMap[cityData.name] = processedCityWeatherDataList
             }
@@ -92,7 +94,10 @@ class ViewModelMainActivity(private val application: WeatherApplication) : ViewM
             cityFiveDayWeatherDataMap.forEach { (cityName, cityWeatherDataList) ->
                 Log.d("MainActivityViewModel", "City: $cityName")
                 cityWeatherDataList.forEach { cityWeatherData ->
-                    Log.d("MainActivityViewModel", "Date: ${cityWeatherData.date}, Min temperature: ${cityWeatherData.tempMin}, Max temperature: ${cityWeatherData.tempMax}")
+                    Log.d(
+                        "MainActivityViewModel",
+                        "Date: ${cityWeatherData.date}, Min temperature: ${cityWeatherData.tempMin}, Max temperature: ${cityWeatherData.tempMax}"
+                    )
                 }
             }
         }
