@@ -20,7 +20,7 @@
             android:exported="true"
             android:label="@string/title_activity_splash"
             android:theme="@style/Theme.Weather.NoActionBar"
-            >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,8 @@
         <activity
             android:name="com.example.weather.presentation.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Weather.NoActionBar">
+            android:theme="@style/Theme.Weather.NoActionBar"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

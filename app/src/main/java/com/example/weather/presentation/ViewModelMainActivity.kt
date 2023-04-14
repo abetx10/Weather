@@ -84,10 +84,17 @@ class ViewModelMainActivity(private val application: WeatherApplication) : ViewM
             val cityFiveDayWeatherDataMap = mutableMapOf<String, List<CityFiveDayWeatherData>>()
             for (cityData in cityDataList) {
                 val cityFiveDayWeatherDataList = weatherDataManager.loadCityFiveDayWeatherData(cityData, apiKey)
-
-                cityFiveDayWeatherDataMap[cityData.name] = cityFiveDayWeatherDataList
+                val processedCityWeatherDataList = cityFiveDayWeatherDataList.processWeatherData()
+                cityFiveDayWeatherDataMap[cityData.name] = processedCityWeatherDataList
             }
             _cityFiveDayWeatherDataMap.value = cityFiveDayWeatherDataMap
+
+            cityFiveDayWeatherDataMap.forEach { (cityName, cityWeatherDataList) ->
+                Log.d("MainActivityViewModel", "City: $cityName")
+                cityWeatherDataList.forEach { cityWeatherData ->
+                    Log.d("MainActivityViewModel", "Date: ${cityWeatherData.date}, Min temperature: ${cityWeatherData.tempMin}, Max temperature: ${cityWeatherData.tempMax}")
+                }
+            }
         }
     }
 

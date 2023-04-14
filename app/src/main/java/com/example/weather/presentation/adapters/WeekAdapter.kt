@@ -3,9 +3,10 @@ package com.example.weather.presentation.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weather.data.model.CityFiveDayWeatherData
 import com.example.weather.databinding.WeekItemBinding
 
-class WeekAdapter(private val weekData: List<WeatherData>) :
+class WeekAdapter(private val weekData: List<CityFiveDayWeatherData>) :
     RecyclerView.Adapter<WeekAdapter.WeekViewHolder>() {
 
     class WeekViewHolder(val binding: WeekItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -26,3 +27,4 @@ class WeekAdapter(private val weekData: List<WeatherData>) :
 
     override fun getItemCount(): Int = weekData.size
 }
+
