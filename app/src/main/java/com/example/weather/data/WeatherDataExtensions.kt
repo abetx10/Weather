@@ -1,10 +1,10 @@
 package com.example.weather.data
 
 import android.icu.text.SimpleDateFormat
-import kotlin.math.min
-import kotlin.math.max
 import com.example.weather.data.model.CityFiveDayWeatherData
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
 fun List<CityFiveDayWeatherData>.processWeatherData(): List<CityFiveDayWeatherData> {
     val dailyTemperatureData = mutableMapOf<String, Pair<Int, Int>>()

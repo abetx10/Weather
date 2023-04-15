@@ -1,7 +1,7 @@
 package com.example.weather.repository
 
 import android.util.Log
-import com.example.weather.data.OpenWeatherMapApi
+import com.example.weather.data.api.OpenWeatherMapApi
 import com.example.weather.data.model.CityData
 import com.example.weather.data.model.CurrentWeatherMinimalApiResponse
 import com.example.weather.data.model.FiveDayWeatherApiResponse

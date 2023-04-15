@@ -1,7 +1,7 @@
-package com.example.weather.data
+package com.example.weather.data.api
 
-import com.example.weather.data.model.CurrentWeatherMinimalApiResponse
 import com.example.weather.data.model.CityData
+import com.example.weather.data.model.CurrentWeatherMinimalApiResponse
 import com.example.weather.data.model.FiveDayWeatherApiResponse
 import retrofit2.Call
 import retrofit2.http.GET

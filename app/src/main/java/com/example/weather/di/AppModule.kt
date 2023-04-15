@@ -1,9 +1,12 @@
 package com.example.weather.di
 
 import android.content.Context
+import androidx.room.Room
 import com.example.weather.R
 import com.example.weather.WeatherApplication
 import com.example.weather.data.WeatherDataManager
+import com.example.weather.data.room.AppDatabase
+import com.example.weather.data.room.WeatherDao
 import com.example.weather.repository.CityRepository
 import dagger.Module
 import dagger.Provides
@@ -38,5 +41,21 @@ object AppModule {
     @Singleton
     fun provideCities(@ApplicationContext context: Context): Array<String> {
         return context.resources.getStringArray(R.array.cities)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "weather_database"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWeatherDao(database: AppDatabase): WeatherDao {
+        return database.weatherDao()
     }
 }

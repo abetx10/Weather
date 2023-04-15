@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.weather.R
 import com.example.weather.databinding.ActivityMainBinding
 import com.example.weather.presentation.dialogs.CitySelectionDialog
+import com.example.weather.presentation.dialogs.NoInternetDialog
+import com.example.weather.utils.isConnectedToInternet
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +34,10 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, TodayFragment())
                 .commit()
+        }
+
+        if (!isConnectedToInternet(this)) {
+            NoInternetDialog.show(this)
         }
 
         bottomNavigation.setOnItemSelectedListener { item ->
