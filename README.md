@@ -23,11 +23,11 @@ MVVM architecture pattern
 ## 
 Screenshots
 
-![LoadingScreen](app/screenshots/LoadingScreen.png alt="LoadingScreen" width="300")
-![StartScreen](app/screenshots/StartScreen.png alt="StartScreen" width="300")
-![SelectCity](app/screenshots/SelectCity.png alt="SelectCity" width="300")
-![CurrentWeather](app/screenshots/CurrentWeather.png alt="CurrentWeather" width="300")
-![ForecastWeather](app/screenshots/ForecastWeather.png alt="ForecastWeather" width="300")
+![LoadingScreen](app/screenshots/LoadingScreen.png | width=300)
+![StartScreen](app/screenshots/StartScreen.png | width=300)
+![SelectCity](app/screenshots/SelectCity.png | width=300)
+![CurrentWeather](app/screenshots/CurrentWeather.png | width=300)
+![ForecastWeather](app/screenshots/ForecastWeather.png | width=300)
 
 ## 
 Installation
