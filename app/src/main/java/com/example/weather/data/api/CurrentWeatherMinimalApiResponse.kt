@@ -1,4 +1,4 @@
-package com.example.weather.data.model
+package com.example.weather.data.api
 
 data class CurrentWeatherMinimalApiResponse(
     val main: MainWeatherMinimalData,

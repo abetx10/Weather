@@ -1,7 +1,7 @@
 package com.example.weather.data.room
 
-import com.example.weather.data.model.CityCurrentWeatherData
-import com.example.weather.data.model.CityFiveDayWeatherData
+import com.example.weather.domain.model.CityCurrentWeatherData
+import com.example.weather.domain.model.CityFiveDayWeatherData
 
 fun CityCurrentWeatherData.toCurrentWeatherEntity(): CurrentWeatherEntity {
     return CurrentWeatherEntity(
@@ -10,7 +10,7 @@ fun CityCurrentWeatherData.toCurrentWeatherEntity(): CurrentWeatherEntity {
             lon = this.lon,
             temp = this.temp,
             pressure = this.pressure,
-            wind_speed = this.wind_speed
+            windSpeed = this.windSpeed
     )
 }
 
@@ -21,7 +21,7 @@ fun CurrentWeatherEntity.toCityCurrentWeatherData(): CityCurrentWeatherData {
             lon = this.lon,
             temp = this.temp,
             pressure = this.pressure,
-            wind_speed = this.wind_speed
+            windSpeed = this.windSpeed
     )
 }
 

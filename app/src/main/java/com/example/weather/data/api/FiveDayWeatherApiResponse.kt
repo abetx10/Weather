@@ -1,4 +1,4 @@
-package com.example.weather.data.model
+package com.example.weather.data.api
 
 import com.google.gson.annotations.SerializedName
 
@@ -7,11 +7,11 @@ data class FiveDayWeatherApiResponse(
 )
 
 data class WeatherEntry(
-    @SerializedName("dt_txt") val dt_txt: String,
+    @SerializedName("dt_txt") val dtTxt: String,
     val main: MainData
 )
 
 data class MainData(
-    @SerializedName("temp_min") val temp_min: Double,
-    @SerializedName("temp_max") val temp_max: Double
+    @SerializedName("temp_min") val tempMin: Double,
+    @SerializedName("temp_max") val tempMax: Double
 )

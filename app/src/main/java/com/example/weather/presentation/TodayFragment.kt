@@ -29,7 +29,7 @@ class TodayFragment : Fragment() {
         viewModel.selectedCity.observe(viewLifecycleOwner) { city ->
             binding.tvTemperatureValue.text = city.temp.toString()
             binding.tvPressureValue.text = city.pressure.toString()
-            binding.tvWindSpeedValue.text = city.wind_speed.toString()
+            binding.tvWindSpeedValue.text = city.windSpeed.toString()
         }
     }
 }

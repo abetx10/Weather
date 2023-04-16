@@ -1,17 +1,12 @@
 <resources>
     <string name="app_name">Weather</string>
-    <string name="title_activity_splash">SplashActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="title_activity_splash">Weather</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Strings used for fragments for navigation -->
     <string name="today">Today</string>
     <string name="week">Week</string>
-    <string name="cancel">Cancel</string>
-    <string name="select_city">Please select city</string>
+
+    <!-- Strings used for ui elements -->
     <string name="temperature">Temperature:</string>
     <string name="weather">Weather:</string>
     <string name="pressure">Pressure:</string>
@@ -22,4 +17,11 @@
     <string name="date">Date</string>
     <string name="min_temp">Min Temp:</string>
     <string name="max_temp">Max Temp:</string>
+
+    <!-- Strings used for dialogs -->
+    <string name="no_internet_connection_title">No Internet Connection</string>
+    <string name="no_internet_connection_message">Please check your internet connection to update the data.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_city">Please select city</string>
 </resources>

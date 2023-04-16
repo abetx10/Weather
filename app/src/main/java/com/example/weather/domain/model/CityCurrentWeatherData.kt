@@ -1,4 +1,4 @@
-package com.example.weather.data.model
+package com.example.weather.domain.model
 
 class CityCurrentWeatherData(
     name: String,
@@ -6,5 +6,5 @@ class CityCurrentWeatherData(
     lon: Double,
     val temp: Double,
     val pressure: Int,
-    val wind_speed: Double
+    val windSpeed: Double
 ) : CityData(name, lat, lon)

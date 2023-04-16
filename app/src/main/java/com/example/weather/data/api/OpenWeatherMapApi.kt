@@ -1,8 +1,6 @@
 package com.example.weather.data.api
 
-import com.example.weather.data.model.CityData
-import com.example.weather.data.model.CurrentWeatherMinimalApiResponse
-import com.example.weather.data.model.FiveDayWeatherApiResponse
+import com.example.weather.domain.model.CityData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

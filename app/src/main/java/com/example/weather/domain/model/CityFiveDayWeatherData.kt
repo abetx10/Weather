@@ -1,4 +1,4 @@
-package com.example.weather.data.model
+package com.example.weather.domain.model
 
 class CityFiveDayWeatherData(
     val date: String,

@@ -4,14 +4,14 @@ import android.content.Context
 import androidx.appcompat.app.AlertDialog
 import com.example.weather.R
 
-class CitySelectionDialog(context: Context, private val onCitySelected: (String) -> Unit) : AlertDialog.Builder(context) {
+class CitySelectionDialog(context: Context, private val onCitySelected: (String) -> Unit) :
+    AlertDialog.Builder(context) {
 
     init {
         val cities = context.resources.getStringArray(R.array.cities)
 
-        setTitle("Please select city")
+        setTitle(context.getString(R.string.select_city))
         setItems(cities) { _, which ->
-            // Здесь обрабатывается выбор города
             val selectedCity = cities[which]
             onCitySelected(selectedCity)
         }

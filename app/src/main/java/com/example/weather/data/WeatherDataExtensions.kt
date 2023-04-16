@@ -1,7 +1,7 @@
 package com.example.weather.data
 
 import android.icu.text.SimpleDateFormat
-import com.example.weather.data.model.CityFiveDayWeatherData
+import com.example.weather.domain.model.CityFiveDayWeatherData
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
@@ -42,7 +42,7 @@ fun List<CityFiveDayWeatherData>.processWeatherData(): List<CityFiveDayWeatherDa
 
 fun getDayOfWeekFromDate(date: String): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-    val outputFormat = SimpleDateFormat("EEEE, yyyy-MM-dd", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("EEEE, yyyy-MM-dd", Locale.ENGLISH)
     val parsedDate = inputFormat.parse(date) ?: return date
     return outputFormat.format(parsedDate)
 }

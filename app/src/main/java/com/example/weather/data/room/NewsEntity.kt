@@ -11,7 +11,7 @@ data class CurrentWeatherEntity(
     val lon: Double,
     val temp: Double,
     val pressure: Int,
-    val wind_speed: Double
+    val windSpeed: Double
 )
 
 @Entity(tableName = "five_day_weather")

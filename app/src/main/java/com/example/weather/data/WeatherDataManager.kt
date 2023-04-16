@@ -1,24 +1,30 @@
 package com.example.weather.data
 
 import android.util.Log
-import com.example.weather.data.model.CityCurrentWeatherData
-import com.example.weather.data.model.CityData
-import com.example.weather.data.model.CityFiveDayWeatherData
+import com.example.weather.domain.model.CityCurrentWeatherData
+import com.example.weather.domain.model.CityData
+import com.example.weather.domain.model.CityFiveDayWeatherData
 import com.example.weather.repository.CityRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.math.round
 
 class WeatherDataManager @Inject constructor(private val cityRepository: CityRepository) {
+    companion object {
+        private const val SEARCH_CITY_RESULT_LIMIT = 1
+    }
 
     suspend fun loadCitiesData(cities: Array<String>, apiKey: String): List<CityData> {
         val cityDataList = mutableListOf<CityData>()
 
         for (city in cities) {
-            val cityData = searchCity(city, 1, apiKey)
+            Log.d("WeatherDataManager", "Searching for city: $city, apiKey: $apiKey")
+            val cityData = searchCity(city, SEARCH_CITY_RESULT_LIMIT, apiKey)
             if (cityData != null) {
-                val roundedLat = String.format("%.2f", cityData.lat).toDouble()
-                val roundedLon = String.format("%.2f", cityData.lon).toDouble()
+                Log.d("WeatherDataManager", "Found city data: $cityData")
+                val roundedLat = round(cityData.lat * 100) / 100
+                val roundedLon = round(cityData.lon * 100) / 100
                 val roundedCityData = CityData(cityData.name, roundedLat, roundedLon)
                 cityDataList.add(roundedCityData)
             }
@@ -28,10 +34,14 @@ class WeatherDataManager @Inject constructor(private val cityRepository: CityRep
 
     private suspend fun searchCity(cityName: String, resultLimit: Int, apiKey: String): CityData? {
         return withContext(Dispatchers.IO) {
+            Log.d("WeatherDataManager", "Searching for city: $cityName, resultLimit: $resultLimit, apiKey: $apiKey")
             val cityDataList = cityRepository.searchCity(cityName, resultLimit, apiKey)
+
             if (cityDataList != null && cityDataList.isNotEmpty()) {
+                Log.d("WeatherDataManager", "Found city data list: $cityDataList")
                 cityDataList[0]
             } else {
+                Log.e("WeatherDataManager", "City not found or empty city data list: $cityName")
                 null
             }
         }
@@ -77,9 +87,9 @@ class WeatherDataManager @Inject constructor(private val cityRepository: CityRep
 
         if (fiveDayWeatherApiResponse != null) {
             for (weatherEntry in fiveDayWeatherApiResponse.list) {
-                val date = weatherEntry.dt_txt
-                val tempMin = weatherEntry.main.temp_min.toInt()
-                val tempMax = weatherEntry.main.temp_max.toInt()
+                val date = weatherEntry.dtTxt
+                val tempMin = weatherEntry.main.tempMin.toInt()
+                val tempMax = weatherEntry.main.tempMax.toInt()
 
                 val cityFiveDayWeatherData = CityFiveDayWeatherData(
                     date,
