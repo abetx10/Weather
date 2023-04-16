@@ -23,10 +23,10 @@ MVVM architecture pattern
 ## 
 Screenshots
 
-![StartScreen](screenshots/StartDisplay.png)
-![SelectCity](screenshots/SelectCity.png)
-![CurrentWeather](screenshots/CurrentWeather.png)
-![5DaysWeather](screenshots/5DaysWeatherr.png)
+![StartScreen](app/screenshots/StartDisplay.png)
+![SelectCity](app/screenshots/SelectCity.png)
+![CurrentWeather](app/screenshots/CurrentWeather.png)
+![5DaysWeather](app/screenshots/5DaysWeatherr.png)
 
 ## 
 Installation
