@@ -23,10 +23,10 @@ MVVM architecture pattern
 ## 
 Screenshots
 
-![StartScreen](Weather/app/screenshots/StartDisplay.png)
-![SelectCity](app/screenshots/SelectCity.png)
-![CurrentWeather](app/screenshots/CurrentWeather.png)
-![5DaysWeather](app/screenshots/5DaysWeatherr.png)
+![StartScreen](https://github.com/abetx10/Weather/blob/master/app/screenshots/StartDisplay.jpg)
+![SelectCity](https://github.com/abetx10/Weather/blob/master/app/screenshots/SelectCity.jpg)
+![CurrentWeather](https://github.com/abetx10/Weather/blob/master/app/screenshots/CurrentWeather.jpg)
+![5DaysWeather](https://github.com/abetx10/Weather/blob/master/app/screenshots/5DaysWeatherr.png)
 
 ## 
 Installation
